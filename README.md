@@ -1,5 +1,5 @@
 # Data-Exploration-Analyzation
-Exploring COVID data to gain insights
+Exploring COVID data to gain insights.
 
 In this Project I downloaded data from www.ourworldindata.com/covid-deaths from Jan. 28th, 2020  to Apr 30th, 2021 to explore and gain insights from.
 
