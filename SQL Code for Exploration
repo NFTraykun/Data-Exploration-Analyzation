@@ -1,0 +1,160 @@
+--Narrowing down some info I want
+SELECT
+  location,
+  date,
+  total_cases,
+  new_cases,
+  total_deaths,
+  population
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+ORDER BY
+  location, date
+
+
+
+--Shows likelihood of dying in the United States from Covid on a given day
+SELECT
+  location,
+  date,
+  total_deaths,
+  total_cases,
+  (total_deaths/total_cases) *100 AS death_percentage
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+WHERE
+  location ="United States"
+ORDER BY
+  date
+  
+
+
+--Shows what percentage of population had Covid in the United States on a given day
+SELECT
+  location,
+  date,
+  total_cases,
+  population,
+  (total_cases/population) *100 AS covid_percentage
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+WHERE
+  location ="United States"
+ORDER BY
+  date
+
+
+
+--Looking at Countries with highest infection rate compared to population
+SELECT
+  location,
+  population,
+  MAX(total_cases) AS highest_infection_count,
+  (MAX(total_cases)/population) * 100 AS percentage_population_infected
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+GROUP BY
+  location,
+  population
+ORDER BY
+  percentage_population_infected DESC
+
+
+--Tracks infected population per location through time by days
+SELECT
+  location,
+  population,
+  date,
+  MAX(total_cases) AS highest_infection_count,
+  (MAX(total_cases)/population) * 100 AS percentage_population_infected
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+GROUP BY
+  location,
+  population,
+  date
+ORDER BY
+  locatio
+
+
+
+--Showing countries with the highest death count compared to population
+SELECT
+  location,
+  MAX(total_deaths) AS total_death_count
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+WHERE
+  continent is not null
+GROUP BY
+  location
+ORDER BY
+  total_death_count DESC
+
+
+
+--This script takes a look at total death count per continent
+SELECT
+  location,
+  MAX(total_deaths) AS total_death_count
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+WHERE
+  continent is null
+  AND
+  location not in ('World', 'European Union', 'International')
+GROUP BY
+  location
+ORDER BY
+  total_death_count DESC
+
+
+
+--Global Death Percentage Per Day
+SELECT
+  date,
+  SUM(new_cases) AS total_cases,
+  SUM(new_deaths) AS total_deaths,
+  SUM(new_deaths)/SUM(new_cases) * 100 AS death_percentage
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+WHERE
+  continent is not null
+GROUP BY
+  date
+ORDER BY
+  date
+
+
+
+--Glodal Death Percentage All Time
+SELECT
+  SUM(new_cases) AS total_cases,
+  SUM(new_deaths) AS total_deaths,
+  SUM(new_deaths)/SUM(new_cases) * 100 AS death_percentage
+FROM
+  traykun-data-analyst-project-1.Covid_Data.Covid_Deaths
+WHERE
+  continent is not null
+
+
+
+--Join the 2 tables together and look at Total Population vs Vaccinations
+SELECT
+  deaths.continent,
+  deaths.location,
+  deaths.date,
+  deaths.population,
+  vaccines.new_vaccinations,
+  SUM(vaccines.new_vaccinations) OVER (PARTITION BY deaths.location ORDER BY deaths.location, deaths.date) AS rolling_people_vaccinated,
+FROM traykun-data-analyst-project-1.Covid_Data.Covid_Deaths AS deaths
+JOIN traykun-data-analyst-project-1.Covid_Data.Covid_Vaccinations AS vaccines
+  ON deaths.location = vaccines.location
+  AND deaths.date = vaccines.date
+WHERE
+  deaths.continent is not null
+ORDER BY
+  2,
+  3
+  
+  
