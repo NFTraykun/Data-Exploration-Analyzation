@@ -1,4 +1,4 @@
---Narrowing down some info I want
+-- Narrowing down some info I want
 SELECT
   location,
   date,
@@ -13,7 +13,7 @@ ORDER BY
 
 
 
---Shows likelihood of dying in the United States from Covid on a given day
+-- Shows the likelihood of dying in the United States from Covid on a given day
 SELECT
   location,
   date,
@@ -29,7 +29,7 @@ ORDER BY
   
 
 
---Shows what percentage of population had Covid in the United States on a given day
+-- Shows what percentage of the population had Covid in the United States on a given day
 SELECT
   location,
   date,
@@ -45,7 +45,7 @@ ORDER BY
 
 
 
---Looking at Countries with highest infection rate compared to population
+-- Looking at Countries with the highest infection rate compared to the population
 SELECT
   location,
   population,
@@ -60,7 +60,7 @@ ORDER BY
   percentage_population_infected DESC
 
 
---Tracks infected population per location through time by days
+-- Tracks infected population per location through time, by days
 SELECT
   location,
   population,
@@ -78,7 +78,7 @@ ORDER BY
 
 
 
---Showing countries with the highest death count compared to population
+-- Showing countries with the highest death count compared to the population
 SELECT
   location,
   MAX(total_deaths) AS total_death_count
@@ -93,7 +93,7 @@ ORDER BY
 
 
 
---This script takes a look at total death count per continent
+-- This script takes a look at the total death count per continent
 SELECT
   location,
   MAX(total_deaths) AS total_death_count
@@ -110,7 +110,7 @@ ORDER BY
 
 
 
---Global Death Percentage Per Day
+-- Global Death Percentage Per Day
 SELECT
   date,
   SUM(new_cases) AS total_cases,
@@ -127,7 +127,7 @@ ORDER BY
 
 
 
---Glodal Death Percentage All Time
+-- Global Death Percentage All Time
 SELECT
   SUM(new_cases) AS total_cases,
   SUM(new_deaths) AS total_deaths,
@@ -139,7 +139,7 @@ WHERE
 
 
 
---Join the 2 tables together and look at Total Population vs Vaccinations
+-- Join the 2 tables together and look at Total Population vs Vaccinations
 SELECT
   deaths.continent,
   deaths.location,
