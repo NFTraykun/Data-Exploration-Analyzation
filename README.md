@@ -6,7 +6,7 @@ In this Project I downloaded data from www.ourworldindata.com/covid-deaths from 
 I looked at the data provided and made a game plan for what stories I could tell with the data provided.
 
 After I wrote all the SQL code I then made a dashboard in Tableau which you can view here with a summary of the data in a simplified form:
-https://public.tableau.com/app/profile/traykun.lesmeister/viz/PortfolioProject_16803072525270/Dashboard1
+https://public.tableau.com/app/profile/traykun.lesmeister/viz/DataExploration-COVID/Dashboard1
 
 The SQL code that I wrote and also the data I used are all provided in this GitHub Repository.
 
